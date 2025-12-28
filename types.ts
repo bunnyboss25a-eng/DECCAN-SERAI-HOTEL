@@ -7,6 +7,7 @@ export type RoomType =
 
 export interface GuestDetails {
   fullName: string;
+  email: string;
   origin: string;
   address: string;
   purpose: string;

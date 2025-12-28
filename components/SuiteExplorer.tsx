@@ -25,7 +25,8 @@ export const SuiteExplorer: React.FC<SuiteExplorerProps> = ({ isOpen, onClose })
     setData("");
     setSources([]);
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+      // Per-call initialization ensures the latest API key is used
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       
       const prompt = `Provide a sophisticated luxury travel summary for Deccan Serai hotel in HITEC City, Hyderabad. 
       Describe:
@@ -33,6 +34,7 @@ export const SuiteExplorer: React.FC<SuiteExplorerProps> = ({ isOpen, onClose })
       2. EXTERIOR CONTEXT: Location in the IT corridor, nearby landmarks like Cyber Towers, and skyline views.
       Return a welcoming overview for premium travelers.`;
 
+      // Use gemini-2.5-flash which supports Maps grounding
       const response = await ai.models.generateContent({
         model: "gemini-2.5-flash", 
         contents: prompt,
@@ -41,6 +43,7 @@ export const SuiteExplorer: React.FC<SuiteExplorerProps> = ({ isOpen, onClose })
         },
       });
 
+      // Correctly access the .text property (not a method)
       const text = response.text || "Deccan Serai offers a premium sanctuary in the heart of Hyderabad's tech hub.";
       const chunks = response.candidates?.[0]?.groundingMetadata?.groundingChunks || [];
       
@@ -56,7 +59,7 @@ export const SuiteExplorer: React.FC<SuiteExplorerProps> = ({ isOpen, onClose })
       setSources(extractedSources);
     } catch (error) {
       console.error("Gemini Error:", error);
-      setData("Welcome to Deccan Serai. Our suites combine high-tech utility with traditional luxury in Hyderabad's HITEC City.");
+      setData("Welcome to Deccan Serai. Our suites combine high-tech utility with traditional luxury in Hyderabad's HITEC City. Our location provides unprecedented access to the city's commercial hubs and leisure destinations.");
     } finally {
       setLoading(false);
     }

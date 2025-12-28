@@ -20,6 +20,7 @@ export const QuickBook: React.FC = () => {
 
   const [guestDetails, setGuestDetails] = useState<GuestDetails>({
     fullName: '',
+    email: '',
     origin: '',
     address: '',
     purpose: '',
@@ -40,18 +41,61 @@ export const QuickBook: React.FC = () => {
     setShowConfirm(true);
   };
 
+  const encode = (data: { [key: string]: string }) => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  };
+
   const handleBookingSubmission = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!guestDetails.fullName || !guestDetails.cellNo || !guestDetails.aadhaarNo || !guestDetails.address) {
+    if (!guestDetails.fullName || !guestDetails.email || !guestDetails.cellNo || !guestDetails.aadhaarNo || !guestDetails.address) {
       alert("Please fill in all mandatory fields.");
       return;
     }
     
     setBookingStep('sending');
     
+    // Create a rich summary for the hotel email
+    const addOnList = Object.entries(booking.addOns)
+      .filter(([_, val]) => val)
+      .map(([key, _]) => key.replace(/([A-Z])/g, ' $1').trim())
+      .join(", ");
+
+    const hotelSummary = `
+      New Booking Request for Deccan Serai
+      ------------------------------------
+      Guest: ${guestDetails.fullName}
+      Stay: ${booking.checkIn} to ${booking.checkOut}
+      Occupancy: ${booking.adults} Adults, ${booking.children} Children
+      Purpose: ${guestDetails.purpose}
+      Add-ons: ${addOnList || 'None'}
+      Origin: ${guestDetails.origin}
+    `.trim();
+
     try {
-      // Simulation of a backend request
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Netlify Form Submission
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({
+          "form-name": "deccan-serai-booking",
+          "subject": `New Reservation: ${guestDetails.fullName} (${booking.checkIn})`,
+          "summary": hotelSummary,
+          "fullName": guestDetails.fullName,
+          "email": guestDetails.email,
+          "cellNo": guestDetails.cellNo,
+          "origin": guestDetails.origin,
+          "address": guestDetails.address,
+          "aadhaarNo": guestDetails.aadhaarNo,
+          "purpose": guestDetails.purpose,
+          "checkIn": booking.checkIn,
+          "checkOut": booking.checkOut,
+          "adults": booking.adults.toString(),
+          "children": booking.children.toString(),
+          "addOns": addOnList
+        })
+      });
       
       setBookingStep('success');
     } catch (error) {
@@ -277,7 +321,15 @@ export const QuickBook: React.FC = () => {
               )}
 
               {bookingStep === 'details' && (
-                <form onSubmit={handleBookingSubmission} className="space-y-6">
+                <form 
+                  onSubmit={handleBookingSubmission} 
+                  className="space-y-6"
+                  name="deccan-serai-booking"
+                  method="POST"
+                  data-netlify="true"
+                >
+                  <input type="hidden" name="form-name" value="deccan-serai-booking" />
+                  
                   <div className="mb-8">
                     <h3 className="text-3xl font-serif text-[#002366] mb-2">Guest Information</h3>
                     <p className="text-slate-400 text-sm italic">Please provide legal details for a seamless check-in experience.</p>
@@ -289,10 +341,24 @@ export const QuickBook: React.FC = () => {
                       <input 
                         required
                         type="text" 
+                        name="fullName"
                         placeholder="e.g. Rahul Sharma"
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-3 outline-none focus:border-[#C5A059] transition-colors"
                         value={guestDetails.fullName}
                         onChange={(e) => setGuestDetails({...guestDetails, fullName: e.target.value})}
+                      />
+                    </div>
+
+                    <div className="md:col-span-2">
+                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Email Address</label>
+                      <input 
+                        required
+                        type="email" 
+                        name="email"
+                        placeholder="e.g. rahul@example.com"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-3 outline-none focus:border-[#C5A059] transition-colors"
+                        value={guestDetails.email}
+                        onChange={(e) => setGuestDetails({...guestDetails, email: e.target.value})}
                       />
                     </div>
                     
@@ -301,6 +367,7 @@ export const QuickBook: React.FC = () => {
                       <input 
                         required
                         type="tel" 
+                        name="cellNo"
                         placeholder="+91 00000 00000"
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-3 outline-none focus:border-[#C5A059] transition-colors"
                         value={guestDetails.cellNo}
@@ -313,6 +380,7 @@ export const QuickBook: React.FC = () => {
                       <input 
                         required
                         type="text" 
+                        name="origin"
                         placeholder="e.g. Bangalore"
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-3 outline-none focus:border-[#C5A059] transition-colors"
                         value={guestDetails.origin}
@@ -325,6 +393,7 @@ export const QuickBook: React.FC = () => {
                       <textarea 
                         required
                         rows={2}
+                        name="address"
                         placeholder="Complete address as per ID"
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-3 outline-none focus:border-[#C5A059] transition-colors resize-none"
                         value={guestDetails.address}
@@ -337,6 +406,7 @@ export const QuickBook: React.FC = () => {
                       <input 
                         required
                         type="text" 
+                        name="aadhaarNo"
                         placeholder="XXXX XXXX XXXX"
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-3 outline-none focus:border-[#C5A059] transition-colors"
                         value={guestDetails.aadhaarNo}
@@ -348,6 +418,7 @@ export const QuickBook: React.FC = () => {
                       <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Purpose of Visit</label>
                       <select 
                         required
+                        name="purpose"
                         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-3 outline-none focus:border-[#C5A059] transition-colors"
                         value={guestDetails.purpose}
                         onChange={(e) => setGuestDetails({...guestDetails, purpose: e.target.value})}
@@ -377,8 +448,8 @@ export const QuickBook: React.FC = () => {
                     </div>
                   </div>
                   <div className="space-y-3 px-4">
-                    <h3 className="text-3xl font-serif text-[#002366]">Syncing...</h3>
-                    <p className="text-slate-400 text-sm">Our concierge system is registering your stay securely.</p>
+                    <h3 className="text-3xl font-serif text-[#002366]">Notifying Concierge...</h3>
+                    <p className="text-slate-400 text-sm">We are dispatching your request to the hotel's central reservation desk.</p>
                   </div>
                 </div>
               )}
@@ -389,32 +460,32 @@ export const QuickBook: React.FC = () => {
                     <div className="w-24 h-24 bg-emerald-50 text-[#C5A059] rounded-full flex items-center justify-center mx-auto mb-6 text-4xl shadow-lg">
                       <i className="fas fa-check-circle"></i>
                     </div>
-                    <h3 className="text-4xl font-serif text-[#002366] mb-2">Reservation Confirmed</h3>
-                    <p className="text-slate-500 text-sm">Your premium stay at Deccan Serai has been successfully recorded.</p>
+                    <h3 className="text-4xl font-serif text-[#002366] mb-2">Reservation Request Sent</h3>
+                    <p className="text-slate-500 text-sm">The hotel management has been notified of your premium stay.</p>
                   </div>
                   
                   <div className="bg-[#002366] text-white p-8 rounded-[2.5rem] mb-10 border border-[#C5A059]/30 shadow-2xl">
                     <div className="flex items-center gap-3 mb-6">
                        <div className="w-10 h-10 bg-[#C5A059] rounded-xl flex items-center justify-center text-[#002366]">
-                         <i className="fas fa-shield-alt"></i>
+                         <i className="fas fa-envelope-open-text"></i>
                        </div>
-                       <h4 className="font-serif text-xl">Verified Secure</h4>
+                       <h4 className="font-serif text-xl">Hotel Notified</h4>
                     </div>
                     
                     <div className="space-y-6 text-sm">
                       <p className="text-white/60 italic leading-relaxed">
-                        Your booking is live in our central reservation system.
+                        A digital briefcase of your details has been sent to <strong>{guestDetails.email}</strong> and the Deccan Serai concierge.
                       </p>
                       
                       <ol className="space-y-4 list-decimal list-inside text-white/90">
-                        <li>Official confirmation has been dispatched.</li>
-                        <li>Room allocation prioritized for your specific criteria.</li>
-                        <li className="font-bold text-[#C5A059]">The Serai guest relations team will contact you shortly.</li>
+                        <li>The reservation team will review your occupancy details.</li>
+                        <li>Room allocation is pending final verification.</li>
+                        <li className="font-bold text-[#C5A059]">Expect an email from our guest relations team shortly to finalize the deposit.</li>
                       </ol>
                     </div>
                   </div>
 
-                  <button onClick={closeModals} className="w-full py-5 bg-[#C5A059] text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl">Return to Experience</button>
+                  <button onClick={closeModals} className="w-full py-5 bg-[#C5A059] text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl">Return to Dashboard</button>
                 </div>
               )}
             </motion.div>

@@ -64,6 +64,24 @@
 </script>
   </head>
   <body class="bg-[#FAFBFE] text-slate-800 selection:bg-[#50C878] selection:text-white">
+    <!-- Netlify Hidden Form for Static Analysis -->
+    <form name="deccan-serai-booking" method="POST" data-netlify="true" hidden>
+      <input type="text" name="subject" />
+      <textarea name="summary"></textarea>
+      <input type="text" name="fullName" />
+      <input type="email" name="email" />
+      <input type="tel" name="cellNo" />
+      <input type="text" name="origin" />
+      <textarea name="address"></textarea>
+      <input type="text" name="aadhaarNo" />
+      <input type="text" name="purpose" />
+      <input type="text" name="checkIn" />
+      <input type="text" name="checkOut" />
+      <input type="text" name="adults" />
+      <input type="text" name="children" />
+      <input type="text" name="addOns" />
+    </form>
+
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

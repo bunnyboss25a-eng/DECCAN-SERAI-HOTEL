@@ -33,10 +33,13 @@ const App: React.FC = () => {
       {/* Hero Section */}
       <section className="relative min-h-[90vh] lg:h-[95vh] flex items-center px-6 pt-32 pb-40 lg:pb-48">
         <div className="absolute inset-0 z-0 overflow-hidden bg-slate-900">
-          <img 
+          <motion.img 
+            initial={{ scale: 1.2 }}
+            animate={{ scale: 1.05 }}
+            transition={{ duration: 10, ease: "linear" }}
             src={HOTEL_ASSETS.exterior}
             alt="Deccan Serai Exterior" 
-            className="w-full h-full object-cover scale-105 opacity-90"
+            className="w-full h-full object-cover opacity-90"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/30"></div>
           

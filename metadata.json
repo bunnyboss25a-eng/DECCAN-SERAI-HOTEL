@@ -1,0 +1,7 @@
+{
+  "name": "Deccan Serai Premium Hotel",
+  "description": "A luxury hotel website for Deccan Serai, HITEC City, Hyderabad, featuring a butterfly-inspired aesthetic, real-time booking dashboard, and interactive local guide.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

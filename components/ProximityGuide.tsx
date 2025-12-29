@@ -1,18 +1,33 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { PROXIMITY_GUIDE } from '../constants';
+import { PROXIMITY_GUIDE, HOTEL_ASSETS } from '../constants';
 
 export const ProximityGuide: React.FC = () => {
   return (
     <section id="guide" className="py-24 bg-[#F8FAFC]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col lg:flex-row gap-12 items-start">
-          <div className="lg:w-1/3">
-            <h2 className="text-4xl font-serif text-[#002366] mb-6">At the Pulse of <br/><span className="text-[#50C878]">HITEC City</span></h2>
-            <p className="text-slate-500 mb-8 leading-relaxed">
-              Deccan Serai is strategically nestled in the golden triangle of Hyderabad's IT corridor. Whether it's meetings at Google or shopping at Inorbit, you're always minutes away.
-            </p>
+          <div className="lg:w-1/3 flex flex-col gap-8">
+            <div>
+              <h2 className="text-4xl font-serif text-[#002366] mb-6">At the Pulse of <br/><span className="text-[#50C878]">HITEC City</span></h2>
+              <p className="text-slate-500 leading-relaxed">
+                Deccan Serai is strategically nestled in the golden triangle of Hyderabad's IT corridor. Whether it's meetings at Google or shopping at Inorbit, you're always minutes away.
+              </p>
+            </div>
+
+            {/* Entrance Image Card */}
+            <div className="relative rounded-2xl overflow-hidden shadow-xl border border-slate-100 group">
+              <img 
+                src={HOTEL_ASSETS.entrance} 
+                alt="Deccan Serai Entrance" 
+                className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#002366] to-transparent p-6 pt-12">
+                <p className="text-white text-sm font-serif italic">A Grand Arrival</p>
+                <p className="text-[#50C878] text-[10px] font-black uppercase tracking-widest">Main Entrance</p>
+              </div>
+            </div>
             
             {/* Weather/Traffic Widget */}
             <div className="bg-white p-6 rounded-2xl butterfly-light border border-slate-100">

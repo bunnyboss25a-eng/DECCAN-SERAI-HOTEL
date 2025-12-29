@@ -106,7 +106,7 @@ export const SuiteExplorer: React.FC<SuiteExplorerProps> = ({ isOpen, onClose })
               <img 
                 src={activeTab === 'interior' 
                   ? HOTEL_ASSETS.bedroom
-                  : HOTEL_ASSETS.courtyard
+                  : HOTEL_ASSETS.exterior
                 } 
                 className="w-full h-full object-cover opacity-80" 
                 alt={activeTab} 
@@ -114,7 +114,7 @@ export const SuiteExplorer: React.FC<SuiteExplorerProps> = ({ isOpen, onClose })
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
               <div className="absolute bottom-10 left-10 text-white">
                  <p className="text-[10px] font-black uppercase tracking-widest text-[#50C878] mb-2">{activeTab === 'interior' ? 'Indoor View' : 'Outdoor View'}</p>
-                 <h4 className="text-3xl font-serif">{activeTab === 'interior' ? 'Refined Comfort' : 'Serene Courtyard'}</h4>
+                 <h4 className="text-3xl font-serif">{activeTab === 'interior' ? 'Refined Comfort' : 'Iconic Landmark'}</h4>
               </div>
             </motion.div>
           </AnimatePresence>

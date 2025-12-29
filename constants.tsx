@@ -10,15 +10,31 @@ export const COLORS = {
   slate: '#F8FAFC'
 };
 
-// Curated high-resolution hospitality imagery
+/**
+ * DECCAN SERAI IMAGE DIRECTORY
+ * Using high-resolution curated photography from Unsplash CDNs.
+ * To use your own images: Replace these URLs with your hosted image links.
+ */
 export const HOTEL_ASSETS = {
-  exterior: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=2000',
-  lobby: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=2000',
-  bedroom: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&q=80&w=2000',
-  restaurant: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80&w=2000',
-  buffet: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=1200',
-  courtyard: 'https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&q=80&w=2000',
-  bathroom: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=1200'
+  // Exterior & Arrival
+  exterior: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&q=80&w=2000', 
+  entrance: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&q=80&w=2000',
+  
+  // Public Spaces
+  lobby: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=2000',
+  courtyard: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=2000',
+  lounge: 'https://images.unsplash.com/photo-1560662105-57f8ad6ae2d1?auto=format&fit=crop&q=80&w=2000',
+  
+  // Rooms
+  bedroom: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=2000',
+  suite_view: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&q=80&w=2000', 
+  twin_room: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&q=80&w=2000',
+  king_room: 'https://images.unsplash.com/photo-1591088398332-8a77d399c842?auto=format&fit=crop&q=80&w=2000',
+  bathroom: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=2000',
+  
+  // Dining
+  restaurant: 'https://images.unsplash.com/photo-1550966841-3ee3ad05903b?auto=format&fit=crop&q=80&w=2000',
+  buffet: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=2000'
 };
 
 export const ROOM_TYPES: RoomType[] = [
@@ -52,7 +68,7 @@ export const ROOM_DETAILS = [
     id: 1,
     name: 'Exclusive Room with Private Balcony',
     price: 8500,
-    image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=1200',
+    image: HOTEL_ASSETS.bedroom,
     description: 'Breathe in the HITEC City air from your private lush balcony.',
     features: ['Private Balcony', 'Emerald Garden View', 'Butterfly-soft Linens']
   },
@@ -60,7 +76,7 @@ export const ROOM_DETAILS = [
     id: 2,
     name: 'Executive Suite (HITEC City View)',
     price: 12500,
-    image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=1200',
+    image: HOTEL_ASSETS.suite_view,
     description: 'Unparalleled panoramic views of the Cyber Towers skyline.',
     features: ['Panoramic Windows', 'Business Lounge Access', 'High-speed Wi-Fi 6']
   },
@@ -68,7 +84,7 @@ export const ROOM_DETAILS = [
     id: 3,
     name: 'Luxury Twin Room',
     price: 7200,
-    image: 'https://images.unsplash.com/photo-1595576508898-0ad5c879a061?auto=format&fit=crop&q=80&w=1200',
+    image: HOTEL_ASSETS.twin_room,
     description: 'Perfect for business pairs or families visiting the city.',
     features: ['Dual Master Beds', 'Work Station', 'Premium Minibar']
   },
@@ -76,7 +92,7 @@ export const ROOM_DETAILS = [
     id: 4,
     name: 'Deccan Premium King',
     price: 9800,
-    image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&q=80&w=1200',
+    image: HOTEL_ASSETS.king_room,
     description: 'The pinnacle of Deccan luxury with an oversized King bed.',
     features: ['King Size Bed', 'Smart TV with Streaming', 'Soaking Tub']
   }

@@ -60,7 +60,7 @@ export const DiningTimings: React.FC = () => {
                 <span className="text-[#50C878] italic">& Timings</span>
               </h2>
               <p className="text-slate-500 text-lg leading-relaxed mb-10 max-w-lg">
-                Our kitchen follows the rhythmic pulses of the day, offering fresh, locally-sourced ingredients prepared by master chefs.
+                Our kitchen follows the rhythmic pulses of the day, offering fresh, locally-sourced ingredients prepared by master chefs in an ambiance of golden warmth.
               </p>
 
               <div className="flex items-center gap-4 mb-12 p-6 bg-white rounded-3xl butterfly-light border border-slate-100 max-w-sm">
@@ -90,10 +90,26 @@ export const DiningTimings: React.FC = () => {
           <div className="lg:w-1/2 relative">
              <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-4 pt-12">
-                   <img src={HOTEL_ASSETS.restaurant} className="rounded-[2.5rem] w-full aspect-[3/4] object-cover shadow-2xl" alt="Dining Area" />
+                   <img 
+                      src={HOTEL_ASSETS.restaurant} 
+                      className="rounded-[2.5rem] w-full h-64 lg:h-80 object-cover shadow-2xl hover:scale-[1.02] transition-transform duration-500" 
+                      alt="Fine Dining with Gold Lamps" 
+                   />
+                   <div className="p-4 bg-white rounded-3xl shadow-lg border border-slate-50">
+                      <p className="text-[10px] font-black uppercase tracking-widest text-[#002366]">Ambience</p>
+                      <p className="text-xs text-slate-400">Warm & Sophisticated</p>
+                   </div>
                 </div>
                 <div className="space-y-4">
-                   <img src={HOTEL_ASSETS.buffet} className="rounded-[2.5rem] w-full aspect-[3/4] object-cover shadow-2xl" alt="Buffet Spread" />
+                   <div className="p-4 bg-[#002366] rounded-3xl shadow-lg">
+                      <p className="text-[10px] font-black uppercase tracking-widest text-[#50C878]">Cuisine</p>
+                      <p className="text-xs text-white/70">Multi-cuisine Buffet</p>
+                   </div>
+                   <img 
+                      src={HOTEL_ASSETS.buffet} 
+                      className="rounded-[2.5rem] w-full h-64 lg:h-80 object-cover shadow-2xl hover:scale-[1.02] transition-transform duration-500" 
+                      alt="Buffet Spread" 
+                   />
                 </div>
              </div>
           </div>

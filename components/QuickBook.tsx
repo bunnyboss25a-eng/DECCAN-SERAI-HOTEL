@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BookingState, GuestDetails } from '../types';
@@ -56,7 +57,6 @@ export const QuickBook: React.FC = () => {
     
     setBookingStep('sending');
     
-    // Create a rich summary for the hotel email
     const addOnList = Object.entries(booking.addOns)
       .filter(([_, val]) => val)
       .map(([key, _]) => key.replace(/([A-Z])/g, ' $1').trim())
@@ -74,7 +74,6 @@ export const QuickBook: React.FC = () => {
     `.trim();
 
     try {
-      // Netlify Form Submission
       await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -111,7 +110,7 @@ export const QuickBook: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto -mt-16 lg:-mt-20 relative z-30 px-6">
+    <div id="booking-section" className="w-full max-w-7xl mx-auto -mt-16 lg:-mt-20 relative z-30 px-6">
       <div className="bg-white rounded-[2.5rem] p-4 lg:p-8 shadow-2xl butterfly-light border border-slate-100">
         <div className="flex flex-col lg:flex-row items-center gap-8">
           

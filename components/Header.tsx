@@ -16,15 +16,21 @@ export const Header: React.FC<HeaderProps> = ({ businessMode, setBusinessMode })
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollToBooking = () => {
+    const element = document.getElementById('booking-section');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 px-6 py-4 transition-all duration-500 ${isScrolled ? 'glass-nav py-3 border-b border-slate-100 shadow-sm' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <div className="flex flex-col items-center group cursor-pointer">
+        <div className="flex flex-col items-center group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
           <motion.div 
             whileHover={{ scale: 1.05 }}
             className="flex flex-col items-center"
           >
-            {/* Emblem representation */}
             <div className={`w-10 h-10 border-2 rounded-full flex items-center justify-center mb-1 transition-colors duration-300 ${!isScrolled ? 'border-white' : 'border-[#C5A059]'}`}>
               <div className={`w-6 h-6 border-t border-b border-l border-r rounded-full opacity-50 ${!isScrolled ? 'border-white' : 'border-[#C5A059]'}`}></div>
             </div>
@@ -73,7 +79,10 @@ export const Header: React.FC<HeaderProps> = ({ businessMode, setBusinessMode })
             </div>
           </div>
           
-          <button className={`hidden lg:block px-6 py-2 rounded-full font-black text-[10px] tracking-widest transition-all ${!isScrolled ? 'bg-[#C5A059] text-white hover:bg-white hover:text-[#002366]' : 'bg-[#002366] text-white hover:bg-[#C5A059]'}`}>
+          <button 
+            onClick={scrollToBooking}
+            className={`hidden lg:block px-6 py-2 rounded-full font-black text-[10px] tracking-widest transition-all ${!isScrolled ? 'bg-[#C5A059] text-white hover:bg-white hover:text-[#002366]' : 'bg-[#002366] text-white hover:bg-[#C5A059]'}`}
+          >
             RESERVE NOW
           </button>
         </div>

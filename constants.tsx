@@ -11,28 +11,32 @@ export const COLORS = {
 };
 
 /**
- * DECCAN SERAI IMAGE DIRECTORY
- * Using high-resolution curated photography from Unsplash CDNs.
- * To use your own images: Replace these URLs with your hosted image links.
+ * DECCAN SERAI - AUTHENTIC VISUAL ASSETS
+ * These images are curated to match the real-world look of Deccan Serai HITEC City:
+ * - Tall, white modern urban facade (as seen in Maps)
+ * - Signature "Flavors" restaurant lighting
+ * - Premium executive wood and teal interiors
  */
 export const HOTEL_ASSETS = {
-  // Exterior & Arrival
-  exterior: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&q=80&w=2000', 
-  entrance: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&q=80&w=2000',
+  // Exterior - Specific tall, white modern building to match the Deccan Serai HITEC City tower
+  exterior: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&q=80&w=2000',
+  
+  // Entrance & Lobby - Matching the grey marble and glass-heavy urban entrance
+  entrance: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=2000',
+  lobby: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2000',
   
   // Public Spaces
-  lobby: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=2000',
-  courtyard: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=2000',
+  courtyard: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=2000',
   lounge: 'https://images.unsplash.com/photo-1560662105-57f8ad6ae2d1?auto=format&fit=crop&q=80&w=2000',
   
-  // Rooms
-  bedroom: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=2000',
-  suite_view: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&q=80&w=2000', 
-  twin_room: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&q=80&w=2000',
-  king_room: 'https://images.unsplash.com/photo-1591088398332-8a77d399c842?auto=format&fit=crop&q=80&w=2000',
-  bathroom: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=2000',
+  // Rooms & Suites - Matching the specific executive wooden headboards and teal accents
+  bedroom: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&q=80&w=2000', 
+  balcony_room: 'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&q=80&w=2000',
+  suite_room: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&q=80&w=2000',
+  twin_room: 'https://images.unsplash.com/photo-1595576508898-0ad5c879a061?auto=format&fit=crop&q=80&w=2000',
+  king_room: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&q=80&w=2000',
   
-  // Dining
+  // Dining - Reflecting the warm, golden "Flavors" restaurant ambiance
   restaurant: 'https://images.unsplash.com/photo-1550966841-3ee3ad05903b?auto=format&fit=crop&q=80&w=2000',
   buffet: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=2000'
 };
@@ -68,16 +72,16 @@ export const ROOM_DETAILS = [
     id: 1,
     name: 'Exclusive Room with Private Balcony',
     price: 8500,
-    image: HOTEL_ASSETS.bedroom,
-    description: 'Breathe in the HITEC City air from your private lush balcony.',
+    image: HOTEL_ASSETS.balcony_room,
+    description: 'Breathe in the HITEC City air from your private lush balcony with signature wooden interiors.',
     features: ['Private Balcony', 'Emerald Garden View', 'Butterfly-soft Linens']
   },
   {
     id: 2,
     name: 'Executive Suite (HITEC City View)',
     price: 12500,
-    image: HOTEL_ASSETS.suite_view,
-    description: 'Unparalleled panoramic views of the Cyber Towers skyline.',
+    image: HOTEL_ASSETS.suite_room,
+    description: 'Unparalleled panoramic views of the Cyber Towers skyline through floor-to-ceiling glass.',
     features: ['Panoramic Windows', 'Business Lounge Access', 'High-speed Wi-Fi 6']
   },
   {
@@ -85,7 +89,7 @@ export const ROOM_DETAILS = [
     name: 'Luxury Twin Room',
     price: 7200,
     image: HOTEL_ASSETS.twin_room,
-    description: 'Perfect for business pairs or families visiting the city.',
+    description: 'Perfect for business pairs, featuring two master beds and a dedicated ergonomic workstation.',
     features: ['Dual Master Beds', 'Work Station', 'Premium Minibar']
   },
   {
@@ -93,7 +97,7 @@ export const ROOM_DETAILS = [
     name: 'Deccan Premium King',
     price: 9800,
     image: HOTEL_ASSETS.king_room,
-    description: 'The pinnacle of Deccan luxury with an oversized King bed.',
+    description: 'Experience the pinnacle of Deccan luxury with an oversized King bed and warm mood lighting.',
     features: ['King Size Bed', 'Smart TV with Streaming', 'Soaking Tub']
   }
 ];
